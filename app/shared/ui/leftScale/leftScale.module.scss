@@ -1,0 +1,18 @@
+.scale{
+  width: 5rem;
+  background-image: url("/scale.svg");
+  background-size: contain;
+  background-repeat: repeat-y;
+  @media (max-width: 840px){
+    width: 2rem;
+  }
+}
+.time{
+  transform: rotate(90deg);
+  margin-left: 6rem;
+  margin-top: 4rem;
+  font-size: 2rem;
+  @media (max-width: 1025px){
+    opacity: 0;
+  }
+}

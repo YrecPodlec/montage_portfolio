@@ -1,0 +1,19 @@
+.row{
+  background: none;
+  position: relative;
+  aspect-ratio: 1/1;
+  padding: 1rem;
+  img{
+    object-fit: contain;
+  }
+  cursor: pointer;
+}
+.box{
+  padding: .5rem;
+  button{
+    border: none;
+  }
+  border: 1px solid white;
+  border-radius: 4rem;
+
+}

@@ -1,0 +1,21 @@
+.header{
+    position: fixed;
+    width: 100%;
+  z-index: 999;
+  @media(max-width: 640px){
+    display: none;
+  }
+}
+.nav{
+    display: flex;
+    padding: 1rem 7rem;
+    gap: 1rem;
+    justify-content: center;
+    a{
+        padding: 1rem;
+    }
+    a:hover{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,44 @@
+@import "@styles/main";
+.section{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+  border-bottom: 1px solid white;
+  @media (max-width: 840px){
+    gap: 1rem;
+  }
+}
+.content{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 15rem 0;
+  @media (max-width: 1025px){
+    padding: 2rem 2rem 15rem 0;
+  }
+  @media (max-width: 840px){
+    padding: 4rem .5rem;
+  }
+  div{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 70%;
+    @media (max-width: 1025px){
+      max-width: 100%;
+    }
+    p{
+      margin: 0;
+      font-size: 2rem;
+      @media (max-width: 840px){
+        font-size: 1rem;
+      }
+    }
+    span{
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}

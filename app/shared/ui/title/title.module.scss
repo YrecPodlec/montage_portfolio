@@ -1,0 +1,16 @@
+.title{
+  font-size: 6rem;
+  background: linear-gradient(to right, #ffffff, #A4A4A4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  border-bottom: 1px solid white;
+  width: fit-content;
+  @media (max-width: 840px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 640px) {
+    font-size: 1.5rem;
+  }
+}
