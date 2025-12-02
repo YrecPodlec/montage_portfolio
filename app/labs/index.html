@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILYA SKIPPER</title>
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'ALSGorizontVariable';
+            src: url('.././shared/fonts/alsgorizontvariable.woff2') format('woff2'),
+            url('.././shared/fonts/alsgorizontvariable.woff') format('woff');
+            font-display: swap;
+        }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box
+        }
+        /* АНИМАЦИИ */
+        .fade-up { opacity: 0; transform: translateY(100px); }
+        .fade-left { opacity: 0; transform: translateX(-100px); }
+        .scale-in { opacity: 0; transform: scale(0.8); }
+        .stagger-item { opacity: 0; transform: translateY(50px); }
+        body{
+            background:#090B0D;
+            color:white;
+            font-family:'ALSGorizontVariable',sans-serif;
+            overflow-x:hidden
+        }
+        a{color:inherit;text-decoration:none}
+
+        /* HERO + NAVBAR + ABOUT  */
+        .hero{position:relative;height:95vh;display:flex;flex-direction:column;justify-content:flex-end}
+        .hero__video{position:absolute;inset:0;overflow:hidden;z-index:-1;opacity:.25}
+        .hero__video video{width:100%;height:100%;object-fit:cover}
+        @media(max-width:640px){.hero__video{display:none}}
+        .hero__content{display:grid;grid-template-columns:1fr 1fr;padding:0 5rem 4rem;gap:2rem;align-content:end}
+        @media(max-width:1025px){.hero__content{grid-template-columns:1fr}}
+        @media(max-width:840px){.hero__content{padding:0 1rem 4rem}}
+        .hero__left{font-weight:750}
+        .hero__left h1{font-size:7rem;margin:0;text-decoration:4px underline solid white}
+        @media(max-width:840px){.hero__left h1{font-size:4rem}}
+        @media(max-width:640px){.hero__left h1{font-size:2rem}}
+        @media(max-width:1025px){.hero__left{display:flex;gap:2rem}}
+        .hero__right{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;height:100%}
+        .hero__right h2{font-size:4rem;font-weight:400}
+        @media(max-width:1025px){.hero__right h2{display:none}}
+        .btn{padding:2rem 3rem;border:2px solid white;background:none;color:white;font-size:1.5rem;border-radius:9rem;cursor:pointer;transition:.3s}
+        .btn:hover{background:white;color:black}
+        @media(max-width:640px){.btn{padding:1rem;font-size:1rem}}
+
+        .navbar{position:fixed;top:0;left:0;width:100%;z-index:999;padding:1rem 7rem}
+        @media(max-width:980px){.navbar{padding:1rem;display:flex;justify-content:flex-end}}
+        .nav{display:flex;gap:2rem;justify-content:center;align-items:center}
+        .nav a{padding:1rem;transition:.3s}
+        .nav a:hover{font-weight:bold;text-decoration:underline}
+        @media(max-width:980px){
+            .nav{position:fixed;top:0;left:-100vw;width:100%;height:100vh;background:#000;flex-direction:column;justify-content:center;transition:left .4s}
+            .nav.active{left:0}
+            .nav a{font-size:2rem;padding:1.5rem}
+        }
+        .burger{display:none;cursor:pointer;width:50px;height:50px;position:relative}
+        @media(max-width:980px){.burger{display:block}}
+        .burger div{background:white;width:3rem;height:.25rem;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+        .burger div::before,.burger div::after{content:"";position:absolute;width:3rem;height:.25rem;background:white}
+        .burger div::before{top:-.8rem}
+        .burger div::after{top:.8rem}
+        .burger.active div{background:transparent}
+        .burger.active div::before{transform:rotate(45deg);top:0}
+        .burger.active div::after{transform:rotate(-45deg);top:0}
+
+        .about-section{display:flex;gap:5rem;border-bottom:1px solid white}
+        @media(max-width:840px){.about-section{gap:1rem}}
+        .about-content{padding:15rem 0;display:flex;align-items:center;width:100%}
+        @media(max-width:1025px){.about-content{padding:2rem 2rem 15rem 0}}
+        @media(max-width:840px){.about-content{padding:4rem .5rem}}
+        .about-text{gap:2.5rem;display:flex;flex-direction:column;max-width:70%}
+        @media(max-width:1025px){.about-text{max-width:100%}}
+        .about-text p{font-size:2rem;margin:0}
+        @media(max-width:840px){.about-text p{font-size:1rem}}
+        .about-text span{font-weight:bold;text-decoration:underline}
+        .section-title{font-size:6rem;background:linear-gradient(to right,#fff,#a4a4a4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:0;border-bottom:1px solid white;width:fit-content}
+        @media(max-width:840px){.section-title{font-size:3rem}}
+        @media(max-width:640px){.section-title{font-size:1.5rem}}
+        .left-scale{
+            width:5rem;
+            background:url("/scale.svg") repeat-y contain
+        }
+        @media(max-width:840px){.left-scale{width:2rem}}
+        .time{transform:rotate(90deg);margin-left:6rem;margin-top:4rem;font-size:2rem}
+        @media(max-width:1025px){.time{opacity:0}}
+
+        .gallery-section{display:flex;gap:5rem;border-bottom:1px solid white;position:relative}
+        @media(max-width:1025px){.gallery-section{gap:1rem}}
+        .gallery-wrapper{padding:6rem 8rem;width:100%;overflow:hidden}
+        @media(max-width:1025px){.gallery-wrapper{padding:2rem}}
+        @media(max-width:640px){.gallery-wrapper{padding:1rem}}
+
+        .gallery-title{margin-bottom:4rem}
+        @media(max-width:640px){.gallery-title{margin-bottom:2rem}}
+
+        .gallery-row{
+            display:flex;
+            gap:2rem;
+            align-items:center;
+        }
+        @media(max-width:640px){.gallery-row{gap:.5rem}}
+
+        .video-card{
+            display:flex;
+            flex-direction:column;
+            gap:1.5rem;
+            flex-shrink:0;
+        }
+        @media(max-width:1025px){.video-card{gap:0}}
+
+        .video-preview{
+            position:relative;
+            overflow:hidden;
+            background:#222 center/cover no-repeat;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+        }
+        .video-preview::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,.1);
+            opacity:0;
+            transition:opacity .4s;
+        }
+        .video-preview:hover::before{opacity:1}
+
+        .wide{width:50rem;aspect-ratio:1.7/1;border-radius:4rem}
+        .tall{width:25rem;aspect-ratio:1/1.78;border-radius:4rem}
+
+        @media(max-width:1025px){
+            .wide{width:40rem}
+            .tall{width:15rem;border-radius:2rem}
+        }
+        @media(max-width:840px){
+            .wide{width:30rem;border-radius:2rem}
+        }
+        @media(max-width:640px){
+            .wide{width:15rem;border-radius:1rem}
+            .tall{width:7rem;border-radius:1rem}
+        }
+
+        /* ВТОРОЕ И ПОСЛЕДУЮЩИЕ — МАЛЕНЬКИЕ, БЛЮР */
+        .video-card:not(:first-child) .video-preview{
+            opacity:.5;
+            filter:grayscale(90%) blur(2px);
+            transform:scale(.92);
+            pointer-events:none;
+        }
+
+        .play-icon{
+            width:60px;
+            height:60px;
+            background:rgba(0,0,0,.7);
+            border-radius:50%;
+            clip-path:polygon(30% 20%,30% 80%,75% 50%);
+            margin-left:10px;
+        }
+
+        .video-caption{
+            font-size:1rem;
+            opacity:1;
+            transition:opacity .3s;
+        }
+        @media(max-width:640px){.video-caption{font-size:.5rem}}
+        .video-card:not(:first-child) .video-caption{
+            opacity:0;
+            height:0;
+            transform:scale(0);
+        }
+    </style>
+    <style>
+        /* КОНТАКТЫ */
+        .contact-section{
+            padding: 8rem 8rem;
+            border-bottom: 1px solid white;
+            display: flex;
+            gap: 5rem;
+        }
+        @media(max-width:1025px){.contact-section{padding:4rem 2rem;gap:2rem;flex-direction:column}}
+        .contact-left{width:50%}
+        @media(max-width:1025px){.contact-left{width:100%}}
+        .contact-form{
+            display:flex;
+            flex-direction:column;
+            gap:2rem;
+            max-width:600px;
+        }
+        .form-group{position:relative}
+        .form-group input,
+        .form-group textarea{
+            width:100%;
+            padding:1.5rem;
+            background:transparent;
+            border:2px solid rgba(255,255,255,.3);
+            border-radius:2rem;
+            color:white;
+            font-size:1.2rem;
+            outline:none;
+            transition:.3s;
+        }
+        .form-group textarea{height:150px;resize:none}
+        .form-group input:focus,
+        .form-group textarea:focus{
+            border-color:white;
+        }
+        .error-msg{
+            color:#ff6b6b;
+            font-size:.9rem;
+            margin-top:.5rem;
+            opacity:0;
+            transition:.3s;
+        }
+        .error-msg.show{opacity:1}
+    </style>
+    <style>
+        /* FOOTER */
+        .footer{
+            padding: 5.5rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid white;
+        }
+        @media (max-width: 640px) {
+            .footer { padding: 2rem; }
+        }
+        .boxNav{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .boxNav nav{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .boxNav a{
+            font-size: 1.2rem;
+            transition: .3s;
+        }
+        .boxNav a:hover{
+            text-decoration: underline;
+        }
+        .boxRight{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .itemList{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .boxItem{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .boxItem img{
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .boxItem p{
+            margin: 0;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR + HERO + ABOUT  -->
+<header class="navbar">
+    <nav class="nav" id="nav">
+        <a href="#">Реклама</a><a href="#">Шоу</a><a href="#">Motion Design</a>
+        <a href="#">Интервью</a><a href="#">Музыка</a><a href="#">Reels</a>
+    </nav>
+    <div class="burger" id="burger"><div></div></div>
+</header>
+
+<section class="hero">
+    <div class="hero__video"><video src="../../public/hero.mp4" autoplay muted loop playsinline></video></div>
+    <div class="hero__content">
+        <div class="hero__left"><h1>ILYA</h1><h1>SKIPPER</h1></div>
+        <div class="hero__right"><h2>Режисёр Монтажа</h2><button class="btn">Обсудить проект</button></div>
+    </div>
+</section>
+
+<section class="about-section fade-up">
+    <div class="left-scale"><div class="time">00;01</div></div>
+    <div class="about-content">
+        <div class="about-text">
+            <h1 class="section-title">Обо мне</h1>
+            <p class="">Режиссер монтажа с опытом <span>более 6 лет.</span></p>
+            <p class="">Призер Национального чемпионата <span>«ArtMasters»</span> в категории видеомонтажер.</p>
+            <p class="">Сотрудничал с <span>VK, Вкусно и Точка, Кинопоиск, Одноклассники, телеканал 2х2, Ozon</span> и др.</p>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;02</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">РЕКЛАМА</h1></div>
+        <div class="gallery-row">
+            <div class="video-card fade-up"><div class="video-preview wide" style="background-image:url('../.././public/videos/reklama/1.jpg')"><div class="play-icon"></div></div><div class="video-caption">Вкусно и точка: Демиглас</div></div>
+            <div class="video-card fade-up"><div class="video-preview wide" style="background-image:url('../.././public/videos/reklama/3.jpg')"><div class="play-icon"></div></div><div class="video-caption">Реклама на OZON</div></div>
+            <div class="video-card fade-up"><div class="video-preview wide" style="background-image:url('../.././public/videos/reklama/5.jpg')"><div class="play-icon"></div></div><div class="video-caption">ВК баннер</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ШОУ -->
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;03</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">ШОУ</h1></div>
+        <div class="gallery-row">
+            <div class="video-card fade-up">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/show/1.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">ВК ОТКРЫТАЯ ПРОМЫШЛЕННОСТЬ</div>
+            </div>
+            <div class="video-card fade-up">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/show/3.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Шкипер Клиповое Мышление</div>
+            </div>
+            <div class="video-card fade-up">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/show/2.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Тот Самый Вкус | 3 выпуск</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/show/4.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">ЭСВАТИНИ - САМАЯ СПИДОЗНАЯ СТРАНА В МИРЕ</div>
+            </div>
+            <div class="video-card  fade-up">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/show/5.jpeg')"><div class="play-icon"></div></div>
+                <div class="video-caption">YOKAI. Scam Onlyfans Agency...</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MOTION ДИЗАЙН -->
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;04</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">Motion дизайн</h1></div>
+        <div class="gallery-row fade-up">
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/motion/1.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">How to Make Money Sexting on OnlyFans...</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/motion/2.jpeg')"><div class="play-icon"></div></div>
+                <div class="video-caption">lis skins</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/motion/3.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">ГАЙД НА ЧИСТУЮ КОЖУ - КАК ИЗБАВИТЬСЯ ОТ ПРЫЩЕЙ (АКНЕ)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ИНТЕРВЬЮ -->
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;05</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">Интервью</h1></div>
+        <div class="gallery-row fade-up">
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/interview/1.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Обсуждаем стендап Чебаткова «Человек-слепень»...</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/interview/2.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">VK Лекторий | Санкт-Петербург, VK Fest | 2025...</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/interview/3.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Сбермобайл подкаст</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- МУЗЫКА -->
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;06</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">Музыка</h1></div>
+        <div class="gallery-row fade-up">
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/music/1.png')"><div class="play-icon"></div></div>
+                <div class="video-caption">Macan</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/music/2.jpeg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Клип заново завоевать</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview wide" style="background-image:url('../.././public/videos/music/3.jpg')"><div class="play-icon"></div></div>
+                <div class="video-caption">Сниппет для девочки демона</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <div class="left-scale"><div class="time">00;07</div></div>
+    <div class="gallery-wrapper">
+        <div class="gallery-title"><h1 class="section-title fade-up">REELS</h1></div>
+        <div class="gallery-row fade-up">
+            <div class="video-card">
+                <div class="video-preview tall" style="background-image:url('../.././public/videos/reels/1.png')"><div class="play-icon"></div></div>
+                <div class="video-caption">1000 Отжиманий</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview tall" style="background-image:url('../.././public/videos/reels/2.png')"><div class="play-icon"></div></div>
+                <div class="video-caption">Vk travel</div>
+            </div>
+            <div class="video-card">
+                <div class="video-preview tall" style="background-image:url('../.././public/videos/reels/3.png')"><div class="play-icon"></div></div>
+                <div class="video-caption">Reels Birdaye</div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contact-section">
+    <div class="left-scale"><div class="time">00;08</div></div>
+    <div class="contact-left fade-up">
+        <h1 class="section-title">Контакты</h1>
+        <p style="font-size:2rem;margin-top:2rem;opacity:.8">Напиши мне — обсудим твой проект</p>
+    </div>
+    <div class="contact-form fade-up">
+        <div class="form-group">
+            <input type="text" id="name" placeholder="Имя" required>
+            <div class="error-msg">Введите корректное имя (минимум 2 буквы)</div>
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Email" required>
+            <div class="error-msg">Введите корректный email</div>
+        </div>
+        <div class="form-group">
+            <textarea id="message" placeholder="Сообщение" required></textarea>
+            <div class="error-msg">Сообщение не может быть пустым</div>
+        </div>
+        <button class="btn" onclick="sendMessage()">ОТПРАВИТЬ</button>
+        <p style="margin-top:1rem;color:#4ade80;font-size:1.1rem;display:none" id="success">Сообщение отправлено!</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="boxNav">
+        <nav>
+            <a href="#reklama">Реклама</a>
+            <a href="#show">Шоу</a>
+            <a href="#motion">Motion Design</a>
+            <a href="#docs">Docs</a>
+            <a href="#interview">Интервью</a>
+            <a href="#music">Музыка</a>
+            <a href="#reels">Reels</a>
+        </nav>
+        <div>© Корявкин Илья</div>
+    </div>
+
+    <div class="boxRight">
+        <div class="itemList">
+            <div class="boxItem">
+                <img src="../.././public/ico/1.svg" alt="Корявкин Илья">
+                <p>Корявкин Илья</p>
+            </div>
+            <div class="boxItem">
+                <img src="../.././public/ico/2.svg" alt="@skipper_aep">
+                <p>@skipper_aep</p>
+            </div>
+            <div class="boxItem">
+                <img src="../.././public/ico/3.svg" alt="@skipper_gg">
+                <p>@skipper_gg</p>
+            </div>
+            <div class="boxItem">
+                <img src="../.././public/ico/4.svg" alt="@skipper_aep">
+                <p>@skipper_aep</p>
+            </div>
+        </div>
+
+        <button class="btn">ОБСУДИТЬ ПРОЕКТ</button>
+    </div>
+</footer>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Все fade-up элементы (заголовки, карточки, блоки) — появляются раньше и плавнее
+    gsap.utils.toArray('.fade-up').forEach(el => {
+        gsap.fromTo(el,
+            { opacity: 0, y: 100 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 90%",     // ← раньше срабатывает!
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+
+    // 2. Поочерёдное появление карточек в галереях — красиво и надёжно
+    gsap.utils.toArray('.gallery-row').forEach(row => {
+        gsap.fromTo(row.querySelectorAll('.video-card'),
+            { opacity: 0, y: 80 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                stagger: 0.15,
+                ease: "back.out(1.5)",
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top 88%",    // ← раньше и стабильнее
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+
+    // 3. Бургер-меню
+    document.getElementById('burger')?.addEventListener('click', () => {
+        document.getElementById('burger').classList.toggle('active');
+        document.getElementById('nav').classList.toggle('active');
+    });
+
+    // 4. Форма — валидация
+    function sendMessage() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const success = document.getElementById('success');
+
+        let valid = true;
+        document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+
+        if (!/^[а-яА-ЯёЁa-zA-Z\s]{2,30}$/.test(name)) {
+            document.querySelectorAll('.error-msg')[0].classList.add('show');
+            valid = false;
+        }
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            document.querySelectorAll('.error-msg')[1].classList.add('show');
+            valid = false;
+        }
+        if (message.length < 10) {
+            document.querySelectorAll('.error-msg')[2].classList.add('show');
+            valid = false;
+        }
+
+        if (valid) {
+            success.style.display = 'block';
+            setTimeout(() => success.style.display = 'none', 4000);
+            document.querySelector('.contact-form').reset();
+        }
+    }
+</script>
+</body>
+</html>

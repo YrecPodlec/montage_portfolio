@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import styles from './padgination.module.scss'; // оставил твоё имя файла
-import {BtnSlider, PaginationRow, Title} from "@/app/shared";
+import {BtnSlider, PaginationRow, Title} from "../../shared/index";
 
 const Pagination = ({ children, initialArray, title, text }) => {
     const [newArr, setNewArr] = React.useState(initialArray || []);

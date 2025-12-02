@@ -1,8 +1,8 @@
 "use client"
 import React from 'react';
-import {LeftScale, Iframe} from "@/app/shared";
+import {LeftScale, Iframe} from "../../shared/index";
 import styles from './slider.module.scss';
-import { Pagination } from "@/app/features";
+import { Pagination } from "../../features/index";
 
 const Slider = ({ title, initialArray, type, index }) => {
     return (

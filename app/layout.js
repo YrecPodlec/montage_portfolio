@@ -1,5 +1,5 @@
 import "./globals.scss";
-import {Navbar} from "@/app/Widgets";
+import {Footer, Navbar} from "./Widgets";
 
 export const metadata = {
   title: "Илья Корявкин",
@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
       <body>
       <Navbar/>
         {children}
+      <Footer/>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './about.module.scss'
 import Image from "next/image";
-import {LeftScale, Title} from "@/app/shared";
+import {LeftScale, Title} from "../../shared/index";
 const About = ({index}) => {
     return (
         <section className={styles.section}>

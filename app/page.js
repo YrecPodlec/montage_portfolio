@@ -1,4 +1,4 @@
-import {Hero, Section} from "@/app/Widgets";
+import {Hero, Section} from "./Widgets";
 
 export default function Home() {
   return (

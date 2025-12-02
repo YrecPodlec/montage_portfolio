@@ -1,9 +1,10 @@
-@import "@styles/main";
+@import "../../shared/styles/main";
 .section{
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 5rem;
+  background-color: #090B0D;
   border-bottom: 1px solid white;
   @media (max-width: 840px){
     gap: 1rem;
