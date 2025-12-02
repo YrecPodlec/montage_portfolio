@@ -6,7 +6,6 @@ import { LeftScale, Iframe } from "../../shared/index";
 import styles from "./slider.module.scss";
 import { Pagination } from "../../features/index";
 
-// === МАКСИМАЛЬНО БЫСТРО + ОГОНЬ BOUNCE (back.out) ===
 const cardVariants = {
     hidden: {
         opacity: 0,
