@@ -3,8 +3,10 @@ import Hero from "./hero/hero";
 import Section from "./section/section";
 import About from "./about/about";
 import Footer from "./footer/footer";
+import Contact from "./contacts/contacts";
 export {Navbar as Navbar}
 export {Hero as Hero}
 export {Section as Section}
 export {About as About}
 export {Footer as Footer}
+export {Contact as Contact}

@@ -8,13 +8,12 @@ const Navbar = () => {
         <header className={styles.header}>
             <nav className={styles.nav}
             style={open ? {left: 0} : {}}>
-                <Link href={''}>Реклама</Link>
-                <Link href={''}>Шоу</Link>
-                <Link href={''}>Motion Design</Link>
-                <Link href={''}>Docs</Link>
-                <Link href={''}>Интервью</Link>
-                <Link href={''}>Музыка</Link>
-                <Link href={''}>Reels</Link>
+                <Link href={'#Реклама'}>Реклама</Link>
+                <Link href={'#Шоу'}>Шоу</Link>
+                <Link href={'#Motion Design'}>Motion Design</Link>
+                <Link href={'#Интервью'}>Интервью</Link>
+                <Link href={'#Музыка'}>Музыка</Link>
+                <Link href={'#Reels'}>Reels</Link>
             </nav>
             <div className={`${styles.burger} ${open ? styles.active : ''}`} onClick={() => {setOpen(!open)}}>
                 <div/>

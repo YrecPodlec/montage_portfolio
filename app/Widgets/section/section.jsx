@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from "./section.module.scss";
 import {Slider} from "../../features/index";
-import {About} from "../index";
+import {About, Contact} from "../index";
 const Section = () => {
     const array = [
         {
           type: "about",
         },
         {
-            title: "РЕКЛАМА",
+            title: "Реклама",
             type: "wide",
             array: [
                 {
@@ -27,11 +27,6 @@ const Section = () => {
                     text: "Вкусно и точка | Бурунов"
                 },
                 {
-                    video: "https://vkvideo.ru/video_ext.php?oid=-222325636&id=456239034&hash=85350ba84f786e74&hd=3&autoplay=0",
-                    poster: "",
-                    text: "Вкусно и точка | Бурунов"
-                },
-                {
                     video: "https://www.youtube.com/embed/3dwEQyy5Wdw?si=dvDKLrSEXLImf7MH",
                     poster: "./videos/reklama/5.jpg",
                     text: "ВК баннер"
@@ -40,7 +35,7 @@ const Section = () => {
             ]
         },
         {
-            title: "ШОУ",
+            title: "Шоу",
             type: "wide",
             array: [
                 {
@@ -72,7 +67,7 @@ const Section = () => {
             ]
         },
         {
-            title: "Motion дизайн",
+            title: "Motion Design",
             type: "wide",
             array: [
                 {
@@ -132,7 +127,7 @@ const Section = () => {
             ]
         },
         {
-            title: "REELS",
+            title: "Reels",
             type: "tall",
             array: [
                 {
@@ -192,6 +187,7 @@ const Section = () => {
                     );
                 })
             }
+            <Contact/>
         </section>
     );
 };

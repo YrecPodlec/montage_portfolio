@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ILYA SKIPPER</title>
-    <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
@@ -17,7 +16,8 @@
         *{
             margin:0;
             padding:0;
-            box-sizing:border-box
+            box-sizing:border-box;
+            scroll-behavior: smooth;
         }
         /* АНИМАЦИИ */
         .fade-up { opacity: 0; transform: translateY(100px); }
@@ -33,71 +33,330 @@
         a{color:inherit;text-decoration:none}
 
         /* HERO + NAVBAR + ABOUT  */
-        .hero{position:relative;height:95vh;display:flex;flex-direction:column;justify-content:flex-end}
-        .hero__video{position:absolute;inset:0;overflow:hidden;z-index:-1;opacity:.25}
-        .hero__video video{width:100%;height:100%;object-fit:cover}
-        @media(max-width:640px){.hero__video{display:none}}
-        .hero__content{display:grid;grid-template-columns:1fr 1fr;padding:0 5rem 4rem;gap:2rem;align-content:end}
-        @media(max-width:1025px){.hero__content{grid-template-columns:1fr}}
-        @media(max-width:840px){.hero__content{padding:0 1rem 4rem}}
-        .hero__left{font-weight:750}
-        .hero__left h1{font-size:7rem;margin:0;text-decoration:4px underline solid white}
-        @media(max-width:840px){.hero__left h1{font-size:4rem}}
-        @media(max-width:640px){.hero__left h1{font-size:2rem}}
-        @media(max-width:1025px){.hero__left{display:flex;gap:2rem}}
-        .hero__right{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;height:100%}
-        .hero__right h2{font-size:4rem;font-weight:400}
-        @media(max-width:1025px){.hero__right h2{display:none}}
-        .btn{padding:2rem 3rem;border:2px solid white;background:none;color:white;font-size:1.5rem;border-radius:9rem;cursor:pointer;transition:.3s}
-        .btn:hover{background:white;color:black}
-        @media(max-width:640px){.btn{padding:1rem;font-size:1rem}}
-
-        .navbar{position:fixed;top:0;left:0;width:100%;z-index:999;padding:1rem 7rem}
-        @media(max-width:980px){.navbar{padding:1rem;display:flex;justify-content:flex-end}}
-        .nav{display:flex;gap:2rem;justify-content:center;align-items:center}
-        .nav a{padding:1rem;transition:.3s}
-        .nav a:hover{font-weight:bold;text-decoration:underline}
-        @media(max-width:980px){
-            .nav{position:fixed;top:0;left:-100vw;width:100%;height:100vh;background:#000;flex-direction:column;justify-content:center;transition:left .4s}
-            .nav.active{left:0}
-            .nav a{font-size:2rem;padding:1.5rem}
+        .hero {
+            position: relative;
+            height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
-        .burger{display:none;cursor:pointer;width:50px;height:50px;position:relative}
-        @media(max-width:980px){.burger{display:block}}
-        .burger div{background:white;width:3rem;height:.25rem;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-        .burger div::before,.burger div::after{content:"";position:absolute;width:3rem;height:.25rem;background:white}
-        .burger div::before{top:-.8rem}
-        .burger div::after{top:.8rem}
-        .burger.active div{background:transparent}
-        .burger.active div::before{transform:rotate(45deg);top:0}
-        .burger.active div::after{transform:rotate(-45deg);top:0}
 
-        .about-section{display:flex;gap:5rem;border-bottom:1px solid white}
-        @media(max-width:840px){.about-section{gap:1rem}}
-        .about-content{padding:15rem 0;display:flex;align-items:center;width:100%}
-        @media(max-width:1025px){.about-content{padding:2rem 2rem 15rem 0}}
-        @media(max-width:840px){.about-content{padding:4rem .5rem}}
-        .about-text{gap:2.5rem;display:flex;flex-direction:column;max-width:70%}
-        @media(max-width:1025px){.about-text{max-width:100%}}
-        .about-text p{font-size:2rem;margin:0}
-        @media(max-width:840px){.about-text p{font-size:1rem}}
-        .about-text span{font-weight:bold;text-decoration:underline}
-        .section-title{font-size:6rem;background:linear-gradient(to right,#fff,#a4a4a4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:0;border-bottom:1px solid white;width:fit-content}
-        @media(max-width:840px){.section-title{font-size:3rem}}
-        @media(max-width:640px){.section-title{font-size:1.5rem}}
-        .left-scale{
-            width:5rem;
-            background:url("/scale.svg") repeat-y contain
+        .hero__video {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.25;
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            @media (max-width: 640px) {
+                display: none;
+            }
         }
-        @media(max-width:840px){.left-scale{width:2rem}}
-        .time{transform:rotate(90deg);margin-left:6rem;margin-top:4rem;font-size:2rem}
-        @media(max-width:1025px){.time{opacity:0}}
 
-        .gallery-section{display:flex;gap:5rem;border-bottom:1px solid white;position:relative}
-        @media(max-width:1025px){.gallery-section{gap:1rem}}
-        .gallery-wrapper{padding:6rem 8rem;width:100%;overflow:hidden}
-        @media(max-width:1025px){.gallery-wrapper{padding:2rem}}
-        @media(max-width:640px){.gallery-wrapper{padding:1rem}}
+        .hero__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0 5rem 4rem;
+            gap: 2rem;
+            align-content: end;
+
+            @media (max-width: 1025px) {
+                grid-template-columns: 1fr;
+            }
+
+            @media (max-width: 840px) {
+                padding: 0 1rem 4rem;
+            }
+        }
+
+        .hero__left {
+            font-weight: 750;
+
+            h1 {
+                font-size: 7rem;
+                margin: 0;
+                text-decoration: 4px underline solid white;
+
+                @media (max-width: 840px) {
+                    font-size: 4rem;
+                }
+
+                @media (max-width: 640px) {
+                    font-size: 2rem;
+                }
+            }
+
+            @media (max-width: 1025px) {
+                display: flex;
+                gap: 2rem;
+            }
+        }
+
+        .hero__right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 100%;
+
+            h2 {
+                font-size: 4rem;
+                font-weight: 400;
+
+                @media (max-width: 1025px) {
+                    display: none;
+                }
+            }
+        }
+
+        .btn {
+            padding: 2rem 3rem;
+            border: 2px solid white;
+            background: none;
+            color: white;
+            font-size: 1.5rem;
+            border-radius: 9rem;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                background: white;
+                color: black;
+            }
+
+            @media (max-width: 640px) {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 1rem 7rem;
+
+            @media (max-width: 980px) {
+                padding: 1rem;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                padding: 1rem;
+                transition: 0.3s;
+
+                &:hover {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+            }
+
+            @media (max-width: 980px) {
+                position: fixed;
+                top: 0;
+                left: -100vw;
+                width: 100%;
+                height: 100vh;
+                background: #000;
+                flex-direction: column;
+                justify-content: center;
+                transition: left 0.4s;
+
+                &.active {
+                    left: 0;
+                }
+
+                a {
+                    font-size: 2rem;
+                    padding: 1.5rem;
+                }
+            }
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            position: relative;
+
+            @media (max-width: 980px) {
+                display: block;
+            }
+
+            div {
+                background: white;
+                width: 3rem;
+                height: 0.25rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 3rem;
+                    height: 0.25rem;
+                    background: white;
+                }
+
+                &::before {
+                    top: -0.8rem;
+                }
+
+                &::after {
+                    top: 0.8rem;
+                // было top: .8rem → поправил на -0.8rem и 0.8rem
+                }
+            }
+
+            &.active div {
+                background: transparent;
+
+                &::before {
+                    transform: rotate(45deg);
+                    top: 0;
+                }
+
+                &::after {
+                    transform: rotate(-45deg);
+                    top: 0;
+                }
+            }
+        }
+
+        .about-section {
+            display: flex;
+            gap: 5rem;
+            border-bottom: 1px solid white;
+
+            @media (max-width: 840px) {
+                gap: 1rem;
+            }
+        }
+
+        .about-content {
+            padding: 15rem 0;
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            @media (max-width: 1025px) {
+                padding: 2rem 2rem 15rem 0;
+            }
+
+            @media (max-width: 840px) {
+                padding: 4rem 0.5rem;
+            }
+        }
+
+        .about-text {
+            gap: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+
+            @media (max-width: 1025px) {
+                max-width: 100%;
+            }
+
+            p {
+                font-size: 2rem;
+                margin: 0;
+
+                @media (max-width: 840px) {
+                    font-size: 1rem;
+                }
+            }
+
+            span {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+        }
+
+        .section-title {
+            font-size: 6rem;
+            background: linear-gradient(to right, #fff, #a4a4a4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            border-bottom: 1px solid white;
+            width: fit-content;
+
+            @media (max-width: 840px) {
+                font-size: 3rem;
+            }
+
+            @media (max-width: 640px) {
+                font-size: 1.5rem;
+            }
+        }
+
+        .left-scale {
+            width: 5rem;
+            background: url("/scale.svg") repeat-y contain;
+
+            @media (max-width: 840px) {
+                width: 2rem;
+            }
+        }
+
+        .time {
+            transform: rotate(90deg);
+            margin-left: 6rem;
+            margin-top: 4rem;
+            font-size: 2rem;
+
+            @media (max-width: 1025px) {
+                opacity: 0;
+            }
+        }
+
+        .gallery-section {
+            display: flex;
+            gap: 5rem;
+            border-bottom: 1px solid white;
+            position: relative;
+
+            @media (max-width: 1025px) {
+                gap: 1rem;
+            }
+        }
+
+        .gallery-wrapper {
+            padding: 6rem 8rem;
+            width: 100%;
+            overflow: hidden;
+
+            @media (max-width: 1025px) {
+                padding: 2rem;
+            }
+
+            @media (max-width: 640px) {
+                padding: 1rem;
+            }
+        }
 
         .gallery-title{margin-bottom:4rem}
         @media(max-width:640px){.gallery-title{margin-bottom:2rem}}
@@ -135,9 +394,17 @@
             transition:opacity .4s;
         }
         .video-preview:hover::before{opacity:1}
+        .wide {
+            width: 50rem;
+            aspect-ratio: 1.7 / 1;
+            border-radius: 4rem;
+        }
 
-        .wide{width:50rem;aspect-ratio:1.7/1;border-radius:4rem}
-        .tall{width:25rem;aspect-ratio:1/1.78;border-radius:4rem}
+        .tall {
+            width: 25rem;
+            aspect-ratio: 1 / 1.78;
+            border-radius: 4rem;
+        }
 
         @media(max-width:1025px){
             .wide{width:40rem}
@@ -150,8 +417,6 @@
             .wide{width:15rem;border-radius:1rem}
             .tall{width:7rem;border-radius:1rem}
         }
-
-        /* ВТОРОЕ И ПОСЛЕДУЮЩИЕ — МАЛЕНЬКИЕ, БЛЮР */
         .video-card:not(:first-child) .video-preview{
             opacity:.5;
             filter:grayscale(90%) blur(2px);
@@ -182,15 +447,28 @@
     </style>
     <style>
         /* КОНТАКТЫ */
-        .contact-section{
-            padding: 8rem 8rem;
+        .contact-section {
+            padding: 10rem 8rem;
             border-bottom: 1px solid white;
             display: flex;
-            gap: 5rem;
+            gap: 8rem;
+            align-items: center;
+
+            @media (max-width: 1025px) {
+                padding: 6rem 2rem;
+            gap: 4rem;
+                flex-direction: column;
+            }
         }
-        @media(max-width:1025px){.contact-section{padding:4rem 2rem;gap:2rem;flex-direction:column}}
-        .contact-left{width:50%}
-        @media(max-width:1025px){.contact-left{width:100%}}
+
+        .contact-left {
+            width: 50%;
+
+            @media (max-width: 1025px) {
+                width: 100%;
+                text-align: center;
+            }
+        }
         .contact-form{
             display:flex;
             flex-direction:column;
@@ -210,7 +488,10 @@
             outline:none;
             transition:.3s;
         }
-        .form-group textarea{height:150px;resize:none}
+        .form-group textarea{
+            height:150px;
+            resize:none
+        }
         .form-group input:focus,
         .form-group textarea:focus{
             border-color:white;
@@ -222,7 +503,9 @@
             opacity:0;
             transition:.3s;
         }
-        .error-msg.show{opacity:1}
+        .error-msg.show{
+            opacity:1
+        }
     </style>
     <style>
         /* FOOTER */
@@ -286,8 +569,12 @@
 <!-- NAVBAR + HERO + ABOUT  -->
 <header class="navbar">
     <nav class="nav" id="nav">
-        <a href="#">Реклама</a><a href="#">Шоу</a><a href="#">Motion Design</a>
-        <a href="#">Интервью</a><a href="#">Музыка</a><a href="#">Reels</a>
+        <a href="#Реклама">Реклама</a>
+        <a href="#Шоу">Шоу</a>
+        <a href="#Motion Design">Motion Design</a>
+        <a href="#Интервью">Интервью</a>
+        <a href="#Музыка">Музыка</a>
+        <a href="#Reels">Reels</a>
     </nav>
     <div class="burger" id="burger"><div></div></div>
 </header>
@@ -312,10 +599,10 @@
     </div>
 </section>
 
-<section class="gallery-section">
+<section class="gallery-section" id="Реклама">
     <div class="left-scale"><div class="time">00;02</div></div>
     <div class="gallery-wrapper">
-        <div class="gallery-title"><h1 class="section-title fade-up">РЕКЛАМА</h1></div>
+        <div class="gallery-title"><h1 class="section-title fade-up">Реклама</h1></div>
         <div class="gallery-row">
             <div class="video-card fade-up"><div class="video-preview wide" style="background-image:url('../.././public/videos/reklama/1.jpg')"><div class="play-icon"></div></div><div class="video-caption">Вкусно и точка: Демиглас</div></div>
             <div class="video-card fade-up"><div class="video-preview wide" style="background-image:url('../.././public/videos/reklama/3.jpg')"><div class="play-icon"></div></div><div class="video-caption">Реклама на OZON</div></div>
@@ -325,10 +612,10 @@
 </section>
 
 <!-- ШОУ -->
-<section class="gallery-section">
+<section class="gallery-section" id="Шоу">
     <div class="left-scale"><div class="time">00;03</div></div>
     <div class="gallery-wrapper">
-        <div class="gallery-title"><h1 class="section-title fade-up">ШОУ</h1></div>
+        <div class="gallery-title"><h1 class="section-title fade-up">Шоу</h1></div>
         <div class="gallery-row">
             <div class="video-card fade-up">
                 <div class="video-preview wide" style="background-image:url('../.././public/videos/show/1.jpg')"><div class="play-icon"></div></div>
@@ -355,10 +642,10 @@
 </section>
 
 <!-- MOTION ДИЗАЙН -->
-<section class="gallery-section">
+<section class="gallery-section" id="Motion Design">
     <div class="left-scale"><div class="time">00;04</div></div>
     <div class="gallery-wrapper">
-        <div class="gallery-title"><h1 class="section-title fade-up">Motion дизайн</h1></div>
+        <div class="gallery-title"><h1 class="section-title fade-up">Motion Design</h1></div>
         <div class="gallery-row fade-up">
             <div class="video-card">
                 <div class="video-preview wide" style="background-image:url('../.././public/videos/motion/1.jpg')"><div class="play-icon"></div></div>
@@ -377,7 +664,7 @@
 </section>
 
 <!-- ИНТЕРВЬЮ -->
-<section class="gallery-section">
+<section class="gallery-section" id="Интервью">
     <div class="left-scale"><div class="time">00;05</div></div>
     <div class="gallery-wrapper">
         <div class="gallery-title"><h1 class="section-title fade-up">Интервью</h1></div>
@@ -399,7 +686,7 @@
 </section>
 
 <!-- МУЗЫКА -->
-<section class="gallery-section">
+<section class="gallery-section" id="Музыка">
     <div class="left-scale"><div class="time">00;06</div></div>
     <div class="gallery-wrapper">
         <div class="gallery-title"><h1 class="section-title fade-up">Музыка</h1></div>
@@ -420,10 +707,10 @@
     </div>
 </section>
 
-<section class="gallery-section">
+<section class="gallery-section" id="Reels">
     <div class="left-scale"><div class="time">00;07</div></div>
     <div class="gallery-wrapper">
-        <div class="gallery-title"><h1 class="section-title fade-up">REELS</h1></div>
+        <div class="gallery-title"><h1 class="section-title fade-up">Reels</h1></div>
         <div class="gallery-row fade-up">
             <div class="video-card">
                 <div class="video-preview tall" style="background-image:url('../.././public/videos/reels/1.png')"><div class="play-icon"></div></div>

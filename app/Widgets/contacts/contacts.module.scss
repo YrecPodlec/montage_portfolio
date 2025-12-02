@@ -1,0 +1,154 @@
+.section {
+  border-bottom: 1px solid white;
+  display: flex;
+  gap: 8rem;
+  position: relative;
+  background: #090B0D;
+  color: white;
+  font-family: 'ALSGorizontVariable', sans-serif;
+
+  @media (max-width: 1025px) {
+    padding: 6rem 2rem;
+    gap: 4rem;
+    flex-direction: column;
+  }
+}
+
+.content {
+  display: flex;
+  padding: 10rem 8rem;
+  gap: 8rem;
+  width: 100%;
+  align-items: center;
+
+  @media (max-width: 1025px) {
+    flex-direction: column;
+    gap: 4rem;
+  }
+}
+
+.left {
+  width: 50%;
+  @media (max-width: 1025px) {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.title {
+  font-size: 6rem;
+  background: linear-gradient(to right, #fff, #a4a4a4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  border-bottom: 1px solid white;
+  width: fit-content;
+
+  @media (max-width: 840px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 640px) {
+    font-size: 1.8rem;
+  }
+}
+
+.text {
+  font-size: 2.2rem;
+  margin-top: 2rem;
+  opacity: 0.9;
+  line-height: 1.4;
+
+  span {
+    font-size: 1.4rem;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 840px) {
+    font-size: 1.6rem;
+    span { font-size: 1.2rem; }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 1.8rem 2rem;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: 3rem;
+  color: white;
+  font-size: 1.3rem;
+  outline: none;
+  transition: all .4s;
+
+  &::placeholder {
+    color: rgba(255,255,255,.5);
+  }
+
+  &:focus {
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255,255,255,.1);
+  }
+}
+
+.form textarea {
+  height: 180px;
+  resize: none;
+}
+
+// Красная обводка при ошибке
+.error {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+}
+
+.errorMsg {
+  color: #ff6b6b;
+  font-size: .95rem;
+  margin-top: .8rem;
+  opacity: 0;
+  transition: .3s;
+  position: absolute;
+  left: 2rem;
+  &.show { opacity: 1; }
+}
+
+.btn {
+  padding: 2rem 3rem;
+  border: 2px solid white;
+  background: none;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 9rem;
+  cursor: pointer;
+  transition: .3s;
+  font-family: inherit;
+  width: 100%;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
+
+  @media (max-width: 640px) {
+    padding: 1.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.success {
+  color: #4ade80;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  opacity: 0;
+}
