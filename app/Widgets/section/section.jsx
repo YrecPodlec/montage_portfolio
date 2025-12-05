@@ -5,7 +5,7 @@ import {About, Contact} from "../index";
 const Section = () => {
     const array = [
         {
-          type: "about",
+            type: "about",
         },
         {
             title: "Реклама",
@@ -19,17 +19,17 @@ const Section = () => {
                 {
                     video: "https://vkvideo.ru/video_ext.php?oid=-222325636&id=456239037&hash=b962ee37766ca1c0&hd=3&autoplay=0",
                     poster: "./videos/reklama/3.jpg",
-                    text: "Реклама на OZON"
+                    text: "Ozon: Рекламный Ролик"
                 },
                 {
                     video: "https://vkvideo.ru/video_ext.php?oid=-222325636&id=456239034&hash=85350ba84f786e74&hd=3&autoplay=0",
                     poster: "",
-                    text: "Вкусно и точка | Бурунов"
+                    text: "Вкусно и точка: Сергей Бурунов"
                 },
                 {
                     video: "https://www.youtube.com/embed/3dwEQyy5Wdw?si=dvDKLrSEXLImf7MH",
                     poster: "./videos/reklama/5.jpg",
-                    text: "ВК баннер"
+                    text: "ВК: Баннер ВДНХ"
                 },
 
             ]

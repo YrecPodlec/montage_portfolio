@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import styles from './padgination.module.scss'; // оставил твоё имя файла
+import styles from './pagination.module.scss';
 import {BtnSlider, PaginationRow, Title} from "../../shared/index";
 
 const Pagination = ({ children, initialArray, title, text }) => {

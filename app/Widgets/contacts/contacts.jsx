@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import styles from "./contacts.module.scss";
 import { LeftScale } from "../../shared/index";
 
-// Анимации появления полей — по очереди, с bounce
+// Анимации появления полей
 const fieldVariants = {
     hidden: { opacity: 0, y: 80 },
     visible: (i) => ({
@@ -36,40 +36,51 @@ const buttonVariants = {
     },
 };
 
-const Contact = ({ index }) => {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
+const Contact = () => {
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState({});
     const [success, setSuccess] = useState(false);
+
+    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{10,50}$/;
+    const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const emailRegex2 = /^.{1,64}@/;
+    const emailRegex3 = /^[a-zA-Z0-9._%+-]+@/;
+    const emailRegex4 = /@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    const emailRegex5 = /^[^\s]+$/;
+    const emailRegex6 = /^[^"(),:;<>@\[\]\\]+@[^\s@]+$/;
+    const emailRegex7 = /^.+@.+\..+$/;
+    const messageRegex = /^(?=.{10,1000}$)(?!.*<[^>]+>)[\s\S]*$/;
+
+    const isEmailValid = (email) =>
+        emailRegex1.test(email) &&
+        emailRegex2.test(email) &&
+        emailRegex3.test(email) &&
+        emailRegex4.test(email) &&
+        emailRegex5.test(email) &&
+        emailRegex6.test(email) &&
+        emailRegex7.test(email);
+
+    const isNameValid = (name) => nameRegex.test(name);
+    const isMessageValid = (message) => messageRegex.test(message);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setErrors({ ...errors, [e.target.name]: "" });
     };
 
-    const validate = () => {
-        const newErrors = {};
-        if (!/^[а-яА-ЯёЁa-zA-Z\s]{2,30}$/.test(formData.name))
-            newErrors.name = "Введите корректное имя";
-        if (!/^\S+@\S+\.\S+$/.test(formData.email))
-            newErrors.email = "Введите корректный email";
-        if (formData.message.length < 10)
-            newErrors.message = "Сообщение слишком короткое";
-        return newErrors;
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const validationErrors = validate();
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
+        const newErrors = {};
+
+        if (!isNameValid(formData.name)) newErrors.name = "Имя должно быть 10–50 букв";
+        if (!isEmailValid(formData.email)) newErrors.email = "Некорректный email";
+        if (!isMessageValid(formData.message)) newErrors.message = "Сообщение должно быть 10–1000 символов без HTML";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
 
-        // Успех!
         setSuccess(true);
         setTimeout(() => {
             setSuccess(false);
@@ -82,11 +93,10 @@ const Contact = ({ index }) => {
             <LeftScale index={7} />
 
             <div className={styles.content}>
-                {/* Левая часть — заголовок и текст */}
                 <motion.div
                     initial={{ opacity: 0, x: -150 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.4 }}
+                    viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 1.2, type: "spring", stiffness: 100 }}
                     className={styles.left}
                 >
@@ -98,15 +108,12 @@ const Contact = ({ index }) => {
                     </p>
                 </motion.div>
 
-                {/* Форма */}
                 <motion.form
                     onSubmit={handleSubmit}
                     className={styles.form}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                >
-                    {/* Поле Имя */}
+                    viewport={{ once: true, amount: 0.3 }}>
                     <motion.div custom={0} variants={fieldVariants}>
                         <input
                             type="text"
@@ -116,10 +123,9 @@ const Contact = ({ index }) => {
                             placeholder="Имя"
                             className={errors.name ? styles.error : ""}
                         />
-                        {errors.name && <span className={styles.errorMsg}>{errors.name}</span>}
+                        {errors.name && <span className={`${styles.errorMsg} show`}>{errors.name}</span>}
                     </motion.div>
 
-                    {/* Поле Email */}
                     <motion.div custom={1} variants={fieldVariants}>
                         <input
                             type="email"
@@ -129,10 +135,8 @@ const Contact = ({ index }) => {
                             placeholder="Email"
                             className={errors.email ? styles.error : ""}
                         />
-                        {errors.email && <span className={styles.errorMsg}>{errors.email}</span>}
+                        {errors.email && <span className={`${styles.errorMsg} show`}>{errors.email}</span>}
                     </motion.div>
-
-                    {/* Сообщение */}
                     <motion.div custom={2} variants={fieldVariants}>
             <textarea
                 name="message"
@@ -142,7 +146,7 @@ const Contact = ({ index }) => {
                 rows={5}
                 className={errors.message ? styles.error : ""}
             />
-                        {errors.message && <span className={styles.errorMsg}>{errors.message}</span>}
+                        {errors.message && <span className={`${styles.errorMsg} show`}>{errors.message}</span>}
                     </motion.div>
 
                     {/* Кнопка */}
@@ -156,7 +160,6 @@ const Contact = ({ index }) => {
                         ОТПРАВИТЬ СООБЩЕНИЕ
                     </motion.button>
 
-                    {/* Успешное сообщение */}
                     <motion.p
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: success ? 1 : 0, y: success ? 0 : -20 }}

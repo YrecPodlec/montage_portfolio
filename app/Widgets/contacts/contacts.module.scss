@@ -1,47 +1,46 @@
+/* contacts.module.scss */
+
 .section {
-  border-bottom: 1px solid white;
-  display: flex;
-  gap: 8rem;
-  position: relative;
-  background: #090B0D;
+  background: #090b0d;
   color: white;
   font-family: 'ALSGorizontVariable', sans-serif;
-
-  @media (max-width: 1025px) {
-    padding: 6rem 2rem;
-    gap: 4rem;
-    flex-direction: column;
-  }
+  border-bottom: 1px solid white;
+  display: flex;
 }
 
 .content {
-  display: flex;
-  padding: 10rem 8rem;
-  gap: 8rem;
-  width: 100%;
-  align-items: center;
+  display: grid;
+  padding: 6rem 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 
   @media (max-width: 1025px) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 4rem;
   }
 }
 
 .left {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   @media (max-width: 1025px) {
-    width: 100%;
+    align-items: center;
     text-align: center;
   }
 }
 
 .title {
-  font-size: 6rem;
+  font-size: 5rem;
   background: linear-gradient(to right, #fff, #a4a4a4);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
   border-bottom: 1px solid white;
   width: fit-content;
 
@@ -49,15 +48,14 @@
     font-size: 3rem;
   }
   @media (max-width: 640px) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 }
 
 .text {
-  font-size: 2.2rem;
-  margin-top: 2rem;
+  font-size: 2rem;
+  line-height: 1.5;
   opacity: 0.9;
-  line-height: 1.4;
 
   span {
     font-size: 1.4rem;
@@ -66,71 +64,86 @@
 
   @media (max-width: 840px) {
     font-size: 1.6rem;
-    span { font-size: 1.2rem; }
+    span {
+      font-size: 1.2rem;
+    }
+  }
+  @media (max-width: 640px) {
+    font-size: 1.4rem;
+    span {
+      font-size: 1rem;
+    }
   }
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  max-width: 600px;
+  gap: 2rem;
   width: 100%;
+  position: relative;
+
+  @media (max-width: 640px) {
+    gap: 1.5rem;
+  }
 }
 
 .form input,
 .form textarea {
   width: 100%;
-  padding: 1.8rem 2rem;
+  box-sizing: border-box;
+  padding: 1.5rem 2rem;
   background: transparent;
-  border: 2px solid rgba(255,255,255,.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 3rem;
   color: white;
   font-size: 1.3rem;
   outline: none;
-  transition: all .4s;
+  transition: all 0.3s;
 
   &::placeholder {
-    color: rgba(255,255,255,.5);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   &:focus {
     border-color: white;
-    box-shadow: 0 0 20px rgba(255,255,255,.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
   }
 }
 
 .form textarea {
-  height: 180px;
+  min-height: 160px;
   resize: none;
 }
 
-// Красная обводка при ошибке
 .error {
   border-color: #ff6b6b !important;
-  box-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
 }
 
 .errorMsg {
   color: #ff6b6b;
-  font-size: .95rem;
-  margin-top: .8rem;
-  opacity: 0;
-  transition: .3s;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  opacity: 1;
   position: absolute;
   left: 2rem;
-  &.show { opacity: 1; }
+  transition: all 0.3s;
+
+  &.show {
+    opacity: 1;
+  }
 }
 
 .btn {
-  padding: 2rem 3rem;
+  padding: 1.8rem 3rem;
   border: 2px solid white;
+  border-radius: 9rem;
   background: none;
   color: white;
   font-size: 1.5rem;
-  border-radius: 9rem;
   cursor: pointer;
-  transition: .3s;
+  transition: all 0.3s;
   font-family: inherit;
   width: 100%;
 
@@ -150,5 +163,6 @@
   font-size: 1.2rem;
   text-align: center;
   margin-top: 1rem;
-  opacity: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
