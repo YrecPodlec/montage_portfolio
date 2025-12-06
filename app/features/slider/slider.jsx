@@ -45,7 +45,7 @@ const Slider = ({ title, initialArray, type, index }) => {
                                     whileInView="visible"
                                     exit="exit"
                                     viewport={{
-                                        once: false,
+                                        once: true,
                                         amount: 0.1,
                                         margin: "-80px 0px -80px 0px"
                                     }}
@@ -68,7 +68,7 @@ const Slider = ({ title, initialArray, type, index }) => {
                                     <motion.h2
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: idx === 0 ? 1 : 0.6, y: 0 }}
-                                        viewport={{ once: false }}
+                                        viewport={{ once: true }}
                                         transition={{
                                             delay: 0.3 + idx * 0.08,
                                             duration: 0.1,
