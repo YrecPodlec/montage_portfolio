@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import styles from "./contacts.module.scss";
 import { LeftScale } from "../../shared/index";
 
-// Анимации появления полей
 const fieldVariants = {
     hidden: { opacity: 0, y: 80 },
     visible: (i) => ({

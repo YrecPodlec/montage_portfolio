@@ -315,7 +315,7 @@
 
         .left-scale {
             width: 5rem;
-            background: url("/scale.svg") repeat-y contain;
+            background: url("../../public/scale.svg") repeat-y;
 
             @media (max-width: 840px) {
                 width: 2rem;
@@ -448,63 +448,180 @@
     <style>
         /* КОНТАКТЫ */
         .contact-section {
-            padding: 10rem 8rem;
+            background: #090b0d;
+            color: white;
+            font-family: 'ALSGorizontVariable', sans-serif;
             border-bottom: 1px solid white;
             display: flex;
-            gap: 8rem;
-            align-items: center;
-
-            @media (max-width: 1025px) {
-                padding: 6rem 2rem;
-            gap: 4rem;
-                flex-direction: column;
-            }
+            position: relative;
+            box-sizing: border-box;
+        }
+        .content {
+            display: grid;
+            padding: 6rem 4rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .contact-left {
-            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-            @media (max-width: 1025px) {
-                width: 100%;
-                text-align: center;
-            }
+        .section-title {
+            font-size: 5rem;
+            background: linear-gradient(to right, #fff, #a4a4a4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 1.5rem 0;
+            border-bottom: 1px solid white;
+            width: fit-content;
         }
-        .contact-form{
-            display:flex;
-            flex-direction:column;
-            gap:2rem;
-            max-width:600px;
+
+        .contact-left p {
+            font-size: 2rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-top: 2rem;
         }
-        .form-group{position:relative}
-        .form-group input,
-        .form-group textarea{
-            width:100%;
-            padding:1.5rem;
-            background:transparent;
-            border:2px solid rgba(255,255,255,.3);
-            border-radius:2rem;
-            color:white;
-            font-size:1.2rem;
-            outline:none;
-            transition:.3s;
+        .contact-left p span {
+            font-size: 1.4rem;
+            opacity: 0.7;
+            display: block;
         }
-        .form-group textarea{
-            height:150px;
-            resize:none
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+            position: relative;
         }
-        .form-group input:focus,
-        .form-group textarea:focus{
-            border-color:white;
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1.5rem 2rem;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3rem;
+            color: white;
+            font-size: 1.3rem;
+            outline: none;
+            transition: all 0.3s;
         }
-        .error-msg{
-            color:#ff6b6b;
-            font-size:.9rem;
-            margin-top:.5rem;
-            opacity:0;
-            transition:.3s;
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
-        .error-msg.show{
-            opacity:1
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-form textarea {
+            min-height: 160px;
+            resize: none;
+        }
+
+        .error {
+            border-color: #ff6b6b !important;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            position: absolute;
+            left: 2rem;
+            transition: opacity 0.3s;
+        }
+        .error-msg.show {
+            opacity: 1;
+        }
+
+        .btn {
+            padding: 1.8rem 3rem;
+            border: 2px solid white;
+            border-radius: 9rem;
+            background: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            width: 100%;
+        }
+        .btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .success {
+            color: #4ade80;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Анимации (замена Framer Motion) */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(80px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-150px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-left { animation: fadeLeft 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+        .field-0 { animation: fadeUp 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s both; }
+        .field-1 { animation: fadeUp 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s both; }
+        .field-2 { animation: fadeUp 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.8s both; }
+        .btn-animate { animation: scaleIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 1.3s both; }
+
+        /* Responsive */
+        @media (max-width: 1025px) {
+            .content { grid-template-columns: 1fr; gap: 4rem; }
+            .contact-left { align-items: center; text-align: center; }
+        }
+        @media (max-width: 840px) {
+            .section-title { font-size: 3rem; }
+            .contact-left p { font-size: 1.6rem; }
+            .contact-left p span { font-size: 1.2rem; }
+        }
+        @media (max-width: 640px) {
+            .contact-section { padding: 4rem 2rem; }
+            .section-title { font-size: 2rem; }
+            .contact-left p { font-size: 1.4rem; }
+            .contact-left p span { font-size: 1rem; }
+            .contact-form { gap: 1.5rem; }
+            .btn { padding: 1.5rem; font-size: 1.2rem; }
         }
     </style>
     <style>
@@ -732,25 +849,38 @@
 <!-- КОНТАКТЫ -->
 <section class="contact-section">
     <div class="left-scale"><div class="time">00;08</div></div>
-    <div class="contact-left fade-up">
-        <h1 class="section-title">Контакты</h1>
-        <p style="font-size:2rem;margin-top:2rem;opacity:.8">Напиши мне — обсудим твой проект</p>
-    </div>
-    <div class="contact-form fade-up">
-        <div class="form-group">
-            <input type="text" id="name" placeholder="Имя" required>
-            <div class="error-msg">Введите корректное имя (минимум 2 буквы)</div>
+
+    <div class="content">
+        <!-- Левая часть -->
+        <div class="contact-left fade-left">
+            <h1 class="section-title">Контакты</h1>
+            <p>
+                Напиши мне — обсудим твой проект<br>
+                <span>От монтажа до полного продакшена</span>
+            </p>
         </div>
-        <div class="form-group">
-            <input type="email" id="email" placeholder="Email" required>
-            <div class="error-msg">Введите корректный email</div>
-        </div>
-        <div class="form-group">
-            <textarea id="message" placeholder="Сообщение" required></textarea>
-            <div class="error-msg">Сообщение не может быть пустым</div>
-        </div>
-        <button class="btn" onclick="sendMessage()">ОТПРАВИТЬ</button>
-        <p style="margin-top:1rem;color:#4ade80;font-size:1.1rem;display:none" id="success">Сообщение отправлено!</p>
+
+        <!-- Форма -->
+        <form class="contact-form" id="contactForm" novalidate>
+            <div class="field-0">
+                <input type="text" id="name" name="name" placeholder="Имя" required />
+                <div class="error-msg" id="error-name"></div>
+            </div>
+
+            <div class="field-1">
+                <input type="email" id="email" name="email" placeholder="Email" required />
+                <div class="error-msg" id="error-email"></div>
+            </div>
+
+            <div class="field-2">
+                <textarea id="message" name="message" placeholder="Расскажи о проекте..." rows="5" required></textarea>
+                <div class="error-msg" id="error-message"></div>
+            </div>
+
+            <button type="submit" class="btn btn-animate">ОТПРАВИТЬ СООБЩЕНИЕ</button>
+
+            <p class="success" id="success">Спасибо! Скоро свяжусь с тобой</p>
+        </form>
     </div>
 </section>
 
@@ -795,7 +925,6 @@
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Все fade-up элементы (заголовки, карточки, блоки) — появляются раньше и плавнее
     gsap.utils.toArray('.fade-up').forEach(el => {
         gsap.fromTo(el,
             { opacity: 0, y: 100 },
@@ -806,7 +935,7 @@
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%",     // ← раньше срабатывает!
+                    start: "top 90%",
                     toggleActions: "play none none reverse"
                 }
             }
@@ -825,7 +954,7 @@
                 ease: "back.out(1.5)",
                 scrollTrigger: {
                     trigger: row,
-                    start: "top 88%",    // ← раньше и стабильнее
+                    start: "top 88%",
                     toggleActions: "play none none reverse"
                 }
             }
@@ -837,36 +966,85 @@
         document.getElementById('burger').classList.toggle('active');
         document.getElementById('nav').classList.toggle('active');
     });
+</script>
 
-    // 4. Форма — валидация
-    function sendMessage() {
+<script>
+    // Точно те же регулярки, что были в React-компоненте
+    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{10,50}$/;
+    const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const emailRegex2 = /^.{1,64}@/;
+    const emailRegex3 = /^[a-zA-Z0-9._%+-]+@/;
+    const emailRegex4 = /@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    const emailRegex5 = /^[^\s]+$/;
+    const emailRegex6 = /^[^"(),:;<>@\[\]\\]+@[^\s@]+$/;
+    const emailRegex7 = /^.+@.+\..+$/;
+    const messageRegex = /^(?=.{10,1000}$)(?!.*<[^>]+>)[\s\S]*$/;
+
+    const isEmailValid = (email) =>
+        emailRegex1.test(email) &&
+        emailRegex2.test(email) &&
+        emailRegex3.test(email) &&
+        emailRegex4.test(email) &&
+        emailRegex5.test(email) &&
+        emailRegex6.test(email) &&
+        emailRegex7.test(email);
+
+    const isNameValid = (name) => nameRegex.test(name);
+    const isMessageValid = (message) => messageRegex.test(message);
+
+    const form = document.getElementById('contactForm');
+    const successEl = document.getElementById('success');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const success = document.getElementById('success');
+        const message = document.getElementById('message').value;
 
-        let valid = true;
-        document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+        // Сброс ошибок и стилей
+        document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+        successEl.classList.remove('show');
 
-        if (!/^[а-яА-ЯёЁa-zA-Z\s]{2,30}$/.test(name)) {
-            document.querySelectorAll('.error-msg')[0].classList.add('show');
-            valid = false;
+        let hasError = false;
+
+        if (!isNameValid(name)) {
+            document.getElementById('name').classList.add('error');
+            document.getElementById('error-name').textContent = 'Имя должно быть 10–50 букв';
+            document.getElementById('error-name').classList.add('show');
+            hasError = true;
         }
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-            document.querySelectorAll('.error-msg')[1].classList.add('show');
-            valid = false;
+        if (!isEmailValid(email)) {
+            document.getElementById('email').classList.add('error');
+            document.getElementById('error-email').textContent = 'Некорректный email';
+            document.getElementById('error-email').classList.add('show');
+            hasError = true;
         }
-        if (message.length < 10) {
-            document.querySelectorAll('.error-msg')[2].classList.add('show');
-            valid = false;
+        if (!isMessageValid(message)) {
+            document.getElementById('message').classList.add('error');
+            document.getElementById('error-message').textContent = 'Сообщение должно быть 10–1000 символов без HTML';
+            document.getElementById('error-message').classList.add('show');
+            hasError = true;
         }
 
-        if (valid) {
-            success.style.display = 'block';
-            setTimeout(() => success.style.display = 'none', 4000);
-            document.querySelector('.contact-form').reset();
+        if (!hasError) {
+            successEl.classList.add('show');
+            setTimeout(() => {
+                successEl.classList.remove('show');
+                form.reset();
+            }, 4000);
         }
-    }
+    });
+
+    // Очистка ошибки при вводе
+    ['name', 'email', 'message'].forEach(field => {
+        document.getElementById(field).addEventListener('input', function() {
+            this.classList.remove('error');
+            document.getElementById('error-' + field).classList.remove('show');
+        });
+    });
 </script>
+
 </body>
 </html>
