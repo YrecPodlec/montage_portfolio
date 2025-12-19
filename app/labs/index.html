@@ -41,6 +41,10 @@
             justify-content: flex-end;
         }
 
+        p
+
+        #id
+
         .hero__video {
             position: absolute;
             inset: 0;
@@ -942,7 +946,6 @@
         );
     });
 
-    // 2. Поочерёдное появление карточек в галереях — красиво и надёжно
     gsap.utils.toArray('.gallery-row').forEach(row => {
         gsap.fromTo(row.querySelectorAll('.video-card'),
             { opacity: 0, y: 80 },
@@ -961,7 +964,6 @@
         );
     });
 
-    // 3. Бургер-меню
     document.getElementById('burger')?.addEventListener('click', () => {
         document.getElementById('burger').classList.toggle('active');
         document.getElementById('nav').classList.toggle('active');
@@ -969,8 +971,7 @@
 </script>
 
 <script>
-    // Точно те же регулярки, что были в React-компоненте
-    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{10,50}$/;
+    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{2,50}$/;
     const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const emailRegex2 = /^.{1,64}@/;
     const emailRegex3 = /^[a-zA-Z0-9._%+-]+@/;
@@ -1002,7 +1003,6 @@
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value;
 
-        // Сброс ошибок и стилей
         document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
         document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
         successEl.classList.remove('show');

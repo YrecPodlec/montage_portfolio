@@ -40,7 +40,7 @@ const Contact = () => {
     const [errors, setErrors] = useState({});
     const [success, setSuccess] = useState(false);
 
-    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{10,50}$/;
+    const nameRegex = /^[A-Za-zА-Яа-яё\s-]{2,50}$/;
     const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const emailRegex2 = /^.{1,64}@/;
     const emailRegex3 = /^[a-zA-Z0-9._%+-]+@/;
@@ -71,7 +71,7 @@ const Contact = () => {
         e.preventDefault();
         const newErrors = {};
 
-        if (!isNameValid(formData.name)) newErrors.name = "Имя должно быть 10–50 букв";
+        if (!isNameValid(formData.name)) newErrors.name = "Имя должно быть 2–50 букв";
         if (!isEmailValid(formData.email)) newErrors.email = "Некорректный email";
         if (!isMessageValid(formData.message)) newErrors.message = "Сообщение должно быть 10–1000 символов без HTML";
 

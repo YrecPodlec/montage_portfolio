@@ -7,7 +7,7 @@ const Hero = () => {
             <div className={styles.contentDown}>
                 <div className={styles.video}>
                     <video
-                        src="/hero.mp4"
+                        src="/videos/first.mp4"
                         autoPlay
                         muted
                         playsInline
