@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react';
+import Link from "next/link";
 
 const PreviewVkPlayer = ({ poster, video }) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -12,31 +13,29 @@ const PreviewVkPlayer = ({ poster, video }) => {
     };
 
     if (isLoaded) {
-        // Если плеер загружен, показываем iframe
         return (
             <div style={aspectRatioStyle}>
-                <iframe
-                    src={video}
-                    title="VK Video Player"
-                    frameBorder="0"
-                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
-                    allowFullScreen
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: '#000'
-                    }}
-                />
+                    <iframe
+                        src={''}
+                        title="VK Video Player"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+                        allowFullScreen
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: '#000'
+                        }}
+                    />
             </div>
         );
     }
 
     return (
         <div
-            onClick={() => setIsLoaded(true)}
             style={{
                 ...aspectRatioStyle,
                 cursor: 'pointer',
@@ -48,6 +47,7 @@ const PreviewVkPlayer = ({ poster, video }) => {
                 justifyContent: 'center',
             }}
         >
+            <Link href={video}>
             <div
                 style={{
                     width: '60px',
@@ -62,6 +62,7 @@ const PreviewVkPlayer = ({ poster, video }) => {
                 }}
                 aria-label="Начать воспроизведение видео"
             />
+            </Link>
         </div>
     );
 };
