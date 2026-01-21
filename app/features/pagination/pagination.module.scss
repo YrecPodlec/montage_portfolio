@@ -37,3 +37,22 @@
     gap: 1rem;
   }
 }
+.paginationContent {
+  overflow: hidden; // уже есть, но на всякий
+}
+
+.embla__container {
+  display: flex;
+  gap: 2rem; // твой текущий gap из .content
+  align-items: center;
+  user-select: none; // чтобы drag работал гладко
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  @media (max-width: 640px) {
+    gap: 0.5rem;
+  }
+}

@@ -1,32 +1,51 @@
-.section{
+.section {
+  position: relative;
   width: 100%;
   display: flex;
   gap: 5rem;
-  border-bottom: 1px solid white;
-  @media (max-width: 1025px){
+
+  @media (max-width: 1025px) {
     gap: 1rem;
   }
 }
+
+.sectionBorder {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background-color: white;
+  transform-origin: left;
+}
+
 .time{
   transform: rotate(90deg);
   margin-left: 6rem;
   margin-top: 4rem;
   font-size: 2rem;
 }
-.content{
+.contentWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.content {
   display: flex;
-  gap: 2rem;
   align-items: center;
-  align-content: center;
-  @media(max-width: 640px){
-    gap: .5rem;
+
+  @media (max-width: 640px) {
+    gap: 0.5rem;
   }
 }
-.contentVideo{
+
+.contentVideo {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  @media(max-width: 1025px){
+
+  @media (max-width: 1025px) {
     gap: 0;
   }
 }
@@ -82,9 +101,7 @@
   }
 }
 .notYet{
-  scale: 0;
   opacity: 0;
-  height: 0;
 }
 .second{
   width: 40rem;
@@ -107,4 +124,42 @@
   @media(max-width: 640px){
     font-size: .5rem;
   }
+  opacity: 1;
 }
+.posterImage{
+  background-position: center;
+  background-size: cover;
+}
+
+.contentVideo {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.current {
+  scale: 1;
+  opacity: 1;
+  filter: none;
+  width: auto; // или оставляем как есть
+}
+
+.second {
+  scale: 0.92;
+  opacity: 0.5;
+  filter: grayscale(90%) blur(2px);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.hiddenLeft {
+  width: 0px;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+

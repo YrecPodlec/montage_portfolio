@@ -1,5 +1,23 @@
 .section {
   position: relative;
-  overflow: hidden;
   width: 100%;
+}
+
+.unicon {
+  position: absolute;
+  top: -4rem;
+  left: 0;
+  width: 140px;
+  height: 50px;
+
+  background-image: url("../../../public/Union.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  pointer-events: none;
+  z-index: 99;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }

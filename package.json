@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "embla-carousel-react": "^9.0.0-rc01",
     "framer-motion": "^12.23.25",
     "next": "16.0.10",
     "next-video": "^2.5.1",

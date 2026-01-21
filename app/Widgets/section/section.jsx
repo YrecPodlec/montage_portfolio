@@ -1,7 +1,9 @@
-import React from 'react';
+'use client'
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "./section.module.scss";
 import {Slider} from "../../features/index";
 import {About, Contact} from "../index";
+import LeftScale from "../../shared/ui/leftScale/leftScale";
 const Section = () => {
     // const array = [
     //     {
@@ -196,6 +198,11 @@ const Section = () => {
                     poster: "./videos/reklama/5.jpg",
                     text: "ВК: Баннер ВДНХ"
                 },
+                {
+                    video: "https://vkvideo.ru/video-220754053_456245049",
+                    poster: "./videos/reklama/shuba.jpg",
+                    text: "VK ПОД ШУБОЙ 4 - Трейлер"
+                }
 
             ]
         },
@@ -203,6 +210,11 @@ const Section = () => {
             title: "Шоу",
             type: "wide",
             array: [
+                {
+                    video: "https://vkvideo.ru/video-220754053_456244914",
+                    poster:"./videos/show/shuba.jpg",
+                    text: "VK ПОД ШУБОЙ 4"
+                },
                 {
                     video: "https://vk.com/video-223358300_456239024",
                     poster: "./videos/show/1.jpg",
@@ -333,26 +345,54 @@ const Section = () => {
             ]
         },
     ]
-    return (
-        <section className={styles.section}>
-            {
-                array.map((item, index) => {
-                    if (item.type === "about") {
-                        return <About key={index} index={index}/>;
-                    }
+    const sectionRef = useRef(null);
+    // В Section
+    const uniconRef = useRef(null);
 
-                    return (
-                        <Slider
-                            key={index}
-                            index={index}
-                            title={item.title}
-                            type={item.type}
-                            initialArray={item.array}
-                        />
-                    );
-                })
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const handleScroll = () => {
+            const rect = section.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const sectionHeight = rect.height;
+
+            let scrollProgress = (windowHeight - rect.top) / (windowHeight + sectionHeight);
+            scrollProgress = Math.min(Math.max(scrollProgress, 0), 1);
+
+            const maxY = sectionHeight - 50; // высота unicon
+
+            // Используем requestAnimationFrame и напрямую меняем transform через ref
+            if (uniconRef.current) {
+                uniconRef.current.style.transform = `translateY(${scrollProgress * maxY}px)`;
             }
-            <Contact/>
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    return (
+        <section ref={sectionRef} className={styles.section}>
+            <div ref={uniconRef} className={styles.unicon} />
+
+            {array.map((item, index) => {
+                if (item.type === "about") {
+                    return <About key={index} index={index} />;
+                }
+                return (
+                    <Slider
+                        key={index}
+                        index={index}
+                        title={item.title}
+                        type={item.type}
+                        initialArray={item.array}
+                    />
+                );
+            })}
         </section>
     );
 };

@@ -3,12 +3,21 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
   gap: 5rem;
   background-color: #090B0D;
-  border-bottom: 1px solid white;
   @media (max-width: 840px){
     gap: 1rem;
   }
+}
+.sectionBorder {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background-color: white;
+  transform-origin: left;
 }
 .content{
   height: 100%;

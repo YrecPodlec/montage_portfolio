@@ -1,42 +1,36 @@
 "use client"
 import React from 'react';
 import styles from './pagination.module.scss';
-import {BtnSlider, PaginationRow, Title} from "../../shared/index";
+import {PaginationRow, Title} from "../../shared/index";
 
-const Pagination = ({ children, initialArray, title, text }) => {
-    const [newArr, setNewArr] = React.useState(initialArray || []);
+const Pagination = ({ children, initialArray, title }) => {
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
     const next = () => {
-        if (newArr.length <= 1) return;
-        setNewArr(prev => {
-            const arr = [...prev];
-            const first = arr.shift();
-            arr.push(first);
-            return arr;
-        });
+        if (currentIndex < initialArray.length - 1) {
+            setCurrentIndex(prev => prev + 1);
+        }
     };
 
     const prev = () => {
-        if (newArr.length <= 1) return;
-        setNewArr(prev => {
-            const arr = [...prev];
-            const last = arr.pop();
-            arr.unshift(last);
-            return arr;
-        });
+        if (currentIndex > 0) {
+            setCurrentIndex(prev => prev - 1);
+        }
     };
 
     const renderedChildren = typeof children === 'function'
-        ? children(newArr, { next, prev })
+        ? children(initialArray, currentIndex)
         : children;
-
+console.log(currentIndex);
+console.log(initialArray);
+console.log(currentIndex === 0);
     return (
         <section className={styles.paginationSection}>
             <div className={styles.titleContainer}>
                 <Title title={title}/>
                 <div className={styles.btns}>
-                    <PaginationRow click={prev} rotate={0} />
-                    <PaginationRow click={next} rotate={180} />
+                    <PaginationRow click={prev} rotate={0} opacity={currentIndex === 0} />
+                    <PaginationRow click={next} rotate={180} opacity={currentIndex === initialArray.length - 1} />
                 </div>
             </div>
             <div className={styles.paginationContent}>

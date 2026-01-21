@@ -27,7 +27,22 @@ const About = ({ index }) => {
     ];
 
     return (
-        <section className={styles.section}>
+        <motion.section className={styles.section}
+                 initial={{}}
+                 whileInView={{}}
+                 viewport={{ once: true, amount: 0.3 }}
+        >
+            <motion.div
+                className={styles.sectionBorder}
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                    duration: 0.4,
+                    ease: [0.2, 0, 0.2, 1],
+                    delay: 0.4,
+                }}
+            />
             <LeftScale index={index} />
 
             <div className={styles.content}>
@@ -49,7 +64,7 @@ const About = ({ index }) => {
                     ))}
                 </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
