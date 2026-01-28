@@ -12,6 +12,10 @@ const TRANSITION = {
 };
 
 const Slider = ({ title, initialArray, type, index }) => {
+    const isIOS =
+        typeof navigator !== "undefined" &&
+        /iPad|iPhone|iPod/.test(navigator.userAgent);
+
     const containerRef = React.useRef(null);
     const [offsets, setOffsets] = React.useState([]);
     const rafRef = React.useRef(null);
@@ -53,9 +57,7 @@ const Slider = ({ title, initialArray, type, index }) => {
         <motion.section
             className={styles.section}
             id={title}
-            initial={{
-                opacity: 0,
-            }}
+            initial={isIOS ? { opacity: 1 } : { opacity: 0 }}
             whileInView={{
                 opacity: 1
             }}
