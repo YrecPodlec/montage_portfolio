@@ -49,7 +49,9 @@ const Footer = () => {
                     )}
                 </div>
                 <div>
-                    <Btn text={"ОБСУДИТЬ ПРОЕКТ"}/>
+                    <a href="https://t.me/skipper_aep">
+                        <Btn text={"ОБСУДИТЬ ПРОЕКТ"}/>
+                    </a>
                 </div>
             </div>
         </footer>

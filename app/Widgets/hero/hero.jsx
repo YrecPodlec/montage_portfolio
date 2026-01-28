@@ -13,6 +13,7 @@ const Hero = () => {
                     muted
                     loop
                     playsInline
+                    preload="none"
                 />
                 <video
                     className={styles.mobileVideo}
@@ -21,6 +22,7 @@ const Hero = () => {
                     muted
                     loop
                     playsInline
+                    preload="none"
                 />
             </div>
 
@@ -31,7 +33,9 @@ const Hero = () => {
                 </div>
                 <div className={styles.right}>
                     <h2>Режисер Монтажа</h2>
-                    <Btn text={"Обсудить проект"} />
+                    <a href="https://t.me/skipper_aep">
+                        <Btn text={"ОБСУДИТЬ ПРОЕКТ"}/>
+                    </a>
                 </div>
             </div>
         </section>

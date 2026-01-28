@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import { LeftScale } from "../../shared/index";
@@ -102,11 +102,9 @@ const Slider = ({ title, initialArray, type, index }) => {
                                         <motion.div
                                             className={styles.contentVideo}
                                             animate={{
-                                                scale: isCurrent ? 1 : .8,
+                                                scale: isCurrent ? 1 : 0.8,
                                                 opacity: isCurrent ? 1 : 0.5,
-                                                filter: isCurrent
-                                                    ? "none"
-                                                    : "grayscale(90%) blur(2px)",
+                                                filter: isCurrent ? "none" : "grayscale(90%) blur(2px)",
                                             }}
                                             transition={TRANSITION}
                                         >
@@ -118,14 +116,17 @@ const Slider = ({ title, initialArray, type, index }) => {
                                                 target={isCurrent ? "_blank" : undefined}
                                             >
                                                 <motion.div
-                                                    className={`
-                                                        ${styles.posterImage}
-                                                        ${type === "wide" ? styles.wide : styles.tall}
-                                                    `}
-                                                    style={{
-                                                        backgroundImage: `url(${item.poster})`,
-                                                    }}
-                                                />
+                                                    className={`${styles.posterImage} ${type === "wide" ? styles.wide : styles.tall}`}>
+                                                    {console.log("POSTER",item.poster)}
+                                                    <Image
+                                                        src={item.poster}
+                                                        alt={item.title || "Video poster"}
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                        loading="lazy"
+                                                    />
+                                                </motion.div>
                                             </a>
                                         </motion.div>
 

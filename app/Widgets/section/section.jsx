@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from "./section.module.scss";
 import {Slider} from "../../features/index";
 import {About, Contact} from "../index";
-import LeftScale from "../../shared/ui/leftScale/leftScale";
 const Section = () => {
     // const array = [
     //     {
@@ -179,29 +178,29 @@ const Section = () => {
             type: "wide",
             array: [
                 {
+                    video: "https://vkvideo.ru/video-220754053_456245049",
+                    poster: "/videos/reklama/shuba.jpg",
+                    text: "VK ПОД ШУБОЙ 4 - Трейлер"
+                },
+                {
                     video: "https://vkvideo.ru/video-229346894_456239100",
-                    poster: "./videos/reklama/1.jpg",
+                    poster: "/videos/reklama/1.jpg",
                     text: "Вкусно и точка: Демиглас"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239037?list=ln-io4ZwpxDQNyK2MzfL9",
-                    poster: "./videos/reklama/3.jpg",
+                    poster: "/videos/reklama/3.jpg",
                     text: "Ozon: Рекламный Ролик"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239034?list=ln-6g4lAd8TDktqq8oXZw",
-                    poster: "./videos/reklama/burunov.png",
+                    poster: "/videos/reklama/burunov.png",
                     text: "Вкусно и точка: Сергей Бурунов"
                 },
                 {
                     video: "https://www.youtube.com/watch?v=3dwEQyy5Wdw",
-                    poster: "./videos/reklama/5.jpg",
+                    poster: "/videos/reklama/5.jpg",
                     text: "ВК: Баннер ВДНХ"
-                },
-                {
-                    video: "https://vkvideo.ru/video-220754053_456245049",
-                    poster: "./videos/reklama/shuba.jpg",
-                    text: "VK ПОД ШУБОЙ 4 - Трейлер"
                 }
 
             ]
@@ -212,32 +211,32 @@ const Section = () => {
             array: [
                 {
                     video: "https://vkvideo.ru/video-220754053_456244914",
-                    poster:"./videos/show/shuba.jpg",
+                    poster:"/videos/show/shuba.jpg",
                     text: "VK ПОД ШУБОЙ 4"
                 },
                 {
                     video: "https://vk.com/video-223358300_456239024",
-                    poster: "./videos/show/1.jpg",
+                    poster: "/videos/show/1.jpg",
                     text: "ВК ОТКРЫТАЯ ПРОМЫШЛЕННОСТЬ"
                 },
                 {
                     video:"https://vk.com/video-227286852_456239017",
-                    poster:"./videos/show/3.jpg",
+                    poster:"/videos/show/3.jpg",
                     text: "Шкипер Клиповое Мышление"
                 },
                 {
                     video:"https://vk.com/wall-92639977_5827208",
-                    poster:"./videos/show/2.jpg",
+                    poster:"/videos/show/2.jpg",
                     text: "Тот Самый Вкус | 3 выпуск"
                 },
                 {
                     video:"https://youtu.be/wMrsAFQZQVQ?si=ns4HL9G8_YRetnqm",
-                    poster:"./videos/show/4.jpg",
+                    poster:"/videos/show/4.jpg",
                     text: "ЭСВАТИНИ - САМАЯ СПИДОЗНАЯ СТРАНА В МИРЕ"
                 },
                 {
                     video:"https://youtu.be/AvdU-a5etpw?si=8l0D7yMA1GAAyP-g",
-                    poster:"./videos/show/5.jpeg",
+                    poster:"/videos/show/5.jpeg",
                     text: "YOKAI. Scam Onlyfans Agency. When Your Team Leader Becomes Your Biggest Mistake."
                 },
 
@@ -249,17 +248,17 @@ const Section = () => {
             array: [
                 {
                     video:"https://youtu.be/0vBvJOv9ER0?si=wQixWB7gPOiYPhnh",
-                    poster:"./videos/motion/1.jpg",
+                    poster:"/videos/motion/1.jpg",
                     text: "How to Make Money Sexting on OnlyFans: Pro Tips, Rules & Mistakes to Avoid"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239023?list=ln-vx55zzehzngLpHZ8SQ",
-                    poster:"./videos/motion/2.jpeg",
+                    poster:"/videos/motion/2.jpeg",
                     text: "lis skins"
                 },
                 {
                     video: "https://youtu.be/QmfYZmegPso?si=H0Sbem0_5mAFaiKg",
-                    poster:"./videos/motion/3.jpg",
+                    poster:"/videos/motion/3.jpg",
                     text: "ГАЙД НА ЧИСТУЮ КОЖУ - КАК ИЗБАВИТЬСЯ ОТ ПРЫЩЕЙ (АКНЕ)"
                 },
             ]
@@ -270,17 +269,17 @@ const Section = () => {
             array: [
                 {
                     video: "https://vkvideo.ru/video-108468_456255402",
-                    poster: "./videos/interview/1.jpg",
+                    poster: "/videos/interview/1.jpg",
                     text: "Обсуждаем стендап Чебаткова «Человек-слепень», «Игру в кальмара», китайский хит «Нэчжа» и новый альбом Майли Сайрус"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239033?list=ln-gKRfV3eEb5TFr4HoJ3",
-                    poster: "./videos/interview/2.jpg",
+                    poster: "/videos/interview/2.jpg",
                     text: "VK Лекторий | Санкт-Петербург, VK Fest | 2025 | Бустер, Шах Лав соса, Леонид Наумцев"
                 },
                 {
                     video: "https://vk.com/video-165631795_456240370",
-                    poster: "./videos/interview/3.jpg",
+                    poster: "/videos/interview/3.jpg",
                     text: "Сбермобайл подкаст"
                 },
             ]
@@ -290,15 +289,15 @@ const Section = () => {
             array: [
                 {
                     video: "https://vkvideo.ru/video-222325636_456239018?list=ln-9XXNUZ5K717DmqcsE0",
-                    poster:"./videos/music/1.png",
+                    poster:"/videos/music/1.png",
                     text: "Macan"
                 },{
                     video:"https://vkvideo.ru/video-222325636_456239032?list=ln-w8lAKAln7VR03UY54O",
-                    poster:"./videos/music/2.jpeg",
+                    poster:"/videos/music/2.jpeg",
                     text: "Клип заново завоевать"
                 },{
                     video:"https://vkvideo.ru/video-222325636_456239031?list=ln-WqUpxynfVMP6UXmGZk",
-                    poster:"./videos/music/3.jpg",
+                    poster:"/videos/music/3.jpg",
                     text: "Сниппет для девочки демона"
                 },
             ]
@@ -309,44 +308,43 @@ const Section = () => {
             array: [
                 {
                     video: "https://vkvideo.ru/video-222325636_456239025?list=ln-3XeETwyDHEfCZEXvmk",
-                    poster: "./videos/reels/1.png",
+                    poster: "/videos/reels/1.png",
                     text: "1000 Отжиманий Челлендж"
                 },
                 {
                     video: "https://vk.com/clip572972146_456239241",
-                    poster: "./videos/reels/2.png",
+                    poster: "/videos/reels/2.png",
                     text: "Vk travel"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239039?list=ln-m3ZcD6CXE4c2g2W1Gj",
-                    poster: "./videos/reels/3.png",
+                    poster: "/videos/reels/3.png",
                     text: "Reels Birdaye"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239040?list=ln-mo9KUz6xKQ21kNSTk4",
-                    poster: "./videos/reels/4.png",
+                    poster: "/videos/reels/4.png",
                     text: "Рилс вкусно и точка шкипер"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239038?list=ln-EyyWmLHNWwHNTexZbd",
-                    poster: "./videos/reels/5.jpg",
+                    poster: "/videos/reels/5.jpg",
                     text: "Vk kviz"
                 },
                 {
                     video: "https://vk.com/wall-9580285_917670",
-                    poster: "./videos/reels/6.png",
+                    poster: "/videos/reels/6.png",
                     text: "#АвтоСергейОрлов"
                 },
                 {
                     video: "https://vkvideo.ru/video-222325636_456239026?list=ln-zMIaSq64YvqkoeE8NC",
-                    poster: "./videos/reels/7.png",
+                    poster: "/videos/reels/7.png",
                     text: "Клоуны"
                 },
             ]
         },
     ]
     const sectionRef = useRef(null);
-    // В Section
     const uniconRef = useRef(null);
 
     useEffect(() => {

@@ -2,7 +2,7 @@ import "./globals.scss";
 import {Footer, Navbar} from "./Widgets";
 
 export const metadata = {
-  title: "Илья Корявкин",
+  title: "Ilya Skipper",
   description: "Портфолио Илья Корявкин",
 };
 
