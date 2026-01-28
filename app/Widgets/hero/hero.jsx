@@ -21,7 +21,7 @@ const Hero = () => {
             <div className={styles.videoWrapper}>
                 <video
                     key={isMobile ? "mobile" : "desktop"} // важно!
-                    src={isMobile ? "/videos/mobile.mp4" : "/videos/desktop.mp4"}
+                    src={isMobile ? "/videos/mobile_optimized.mp4" : "/videos/desktop_optimized.mp4"}
                     autoPlay
                     muted
                     loop
