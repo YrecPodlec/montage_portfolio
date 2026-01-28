@@ -1,28 +1,32 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import styles from "./hero.module.scss";
-import { Btn } from "../../shared/index";
+import { Btn } from "../../shared";
 
 const Hero = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    if (isMobile === null) return null; // чтобы не было гидрации ада
+
     return (
         <section className={styles.section}>
             <div className={styles.videoWrapper}>
                 <video
-                    className={styles.desktopVideo}
-                    src="/videos/desktop.mp4"
+                    key={isMobile ? "mobile" : "desktop"} // важно!
+                    src={isMobile ? "/videos/mobile.mp4" : "/videos/desktop.mp4"}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    preload="none"
-                />
-                <video
-                    className={styles.mobileVideo}
-                    src="/videos/mobile.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
+                    preload="metadata"
                 />
             </div>
 
@@ -34,12 +38,11 @@ const Hero = () => {
                 <div className={styles.right}>
                     <h2>Режисер Монтажа</h2>
                     <a href="https://t.me/skipper_aep">
-                        <Btn text={"ОБСУДИТЬ ПРОЕКТ"}/>
+                        <Btn text="ОБСУДИТЬ ПРОЕКТ" />
                     </a>
                 </div>
             </div>
         </section>
-
     );
 };
 
