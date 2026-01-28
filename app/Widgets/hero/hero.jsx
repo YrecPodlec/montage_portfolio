@@ -20,7 +20,7 @@ const Hero = () => {
         <section className={styles.section}>
             <div className={styles.videoWrapper}>
                 <video
-                    key={isMobile ? "mobile" : "desktop"} // важно!
+                    key={isMobile ? "mobile" : "desktop"}
                     src={isMobile ? "/videos/mobile_optimized.mp4" : "/videos/desktop_optimized.mp4"}
                     autoPlay
                     muted
