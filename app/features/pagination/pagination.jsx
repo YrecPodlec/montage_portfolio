@@ -21,9 +21,6 @@ const Pagination = ({ children, initialArray, title }) => {
     const renderedChildren = typeof children === 'function'
         ? children(initialArray, currentIndex)
         : children;
-console.log(currentIndex);
-console.log(initialArray);
-console.log(currentIndex === 0);
     return (
         <section className={styles.paginationSection}>
             <div className={styles.titleContainer}>

@@ -37,7 +37,7 @@ const Hero = () => {
                 </div>
                 <div className={styles.right}>
                     <h2>Режисер Монтажа</h2>
-                    <a href="https://t.me/skipper_aep">
+                    <a href="https://t.me/skipper_aep" style={{ textDecoration: "none", color: "white" }}>
                         <Btn text="ОБСУДИТЬ ПРОЕКТ" />
                     </a>
                 </div>

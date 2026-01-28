@@ -57,10 +57,14 @@ const Slider = ({ title, initialArray, type, index }) => {
                 opacity: 0,
             }}
             whileInView={{
-                opacity: 1,
-                scale: 1
+                opacity: 1
             }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{
+                once: true,
+                amount: 0.3,
+                margin: "-80px 0px -80px 0px"
+            }}
+
             transition={{
                 duration: 1.5,
                 ease: [0.2, 0, 0.2, 1],
@@ -71,7 +75,11 @@ const Slider = ({ title, initialArray, type, index }) => {
                 className={styles.sectionBorder}
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{
+                    once: true,
+                    amount: 0.3,
+                    margin: "-80px 0px -80px 0px"
+                }}
                 transition={{
                     duration: 0.4,
                     ease: [0.2, 0, 0.2, 1],
@@ -92,7 +100,7 @@ const Slider = ({ title, initialArray, type, index }) => {
                                         : 0,
                             }}
                             transition={TRANSITION}
-                            layout
+                            layout={false}
                         >
                             {array.map((item, idx) => {
                                 const isCurrent = idx === currentIndex;
@@ -100,6 +108,7 @@ const Slider = ({ title, initialArray, type, index }) => {
                                 return (
                                     <div key={`${item.video}-${idx}`}>
                                         <motion.div
+                                            initial={false}
                                             className={styles.contentVideo}
                                             animate={{
                                                 scale: isCurrent ? 1 : 0.8,
@@ -117,7 +126,6 @@ const Slider = ({ title, initialArray, type, index }) => {
                                             >
                                                 <motion.div
                                                     className={`${styles.posterImage} ${type === "wide" ? styles.wide : styles.tall}`}>
-                                                    {console.log("POSTER",item.poster)}
                                                     <Image
                                                         src={item.poster}
                                                         alt={item.title || "Video poster"}
